@@ -1,6 +1,7 @@
 require 'sinatra'
 
 get '/' do
+    response.headers['Access-Control-Allow-Origin'] = *
     "High Score List"
 end
 
