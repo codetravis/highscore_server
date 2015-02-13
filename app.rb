@@ -19,14 +19,18 @@ post '/' do
      # parse data passed in from game into hash
      player_score = data.split(":")
      # see if score is higher than any of our stored scores
-     score_list.each do |high_score|
-       if player_score[1] > high_score[:score]
-         high_score[:initials] = player_score[0]
-	 high_score[:score] = player_score[1]
-	 break
+     if score_list.length >= 10
+       score_list.each do |high_score|
+         if player_score[1] > high_score[:score]
+           high_score[:initials] = player_score[0]
+	   high_score[:score] = player_score[1]
+	   break
+         end
+         # write new scores to file
+         score_file.write(high_score[:initials] + ":" + high_score[:score])       
        end
-       # write new scores to file
-       score_file.write(high_score[:initials] + ":" + high_score[:score])       
+     else
+       score_list.write(player_score[0] + ":" + player_score[1])
      end
      score_file.close
 end
