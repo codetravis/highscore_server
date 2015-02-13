@@ -10,7 +10,7 @@ end
 
 post '/' do
      score_list = []
-     score_file = File.open('highscores.txt', 'rw')
+     score_file = File.open('highscores.txt', 'w+')
      # parse score file into an array of hashes
      score_file.each_line do |line|
        line_fields = line.split(":")
