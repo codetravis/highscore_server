@@ -28,4 +28,5 @@ post '/' do
        # write new scores to file
        score_file.write(high_score[:initials] + ":" + high_score[:score])       
      end
+     score_file.close
 end
