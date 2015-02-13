@@ -21,7 +21,7 @@ post '/' do
      # see if score is higher than any of our stored scores
      if score_list.length >= 10
        score_list.each do |high_score|
-         if player_score[1] > high_score[:score]
+         if player_score[1].to_i > high_score[:score].to_i
            high_score[:initials] = player_score[0]
 	   high_score[:score] = player_score[1]
 	   break
