@@ -1,0 +1,10 @@
+aaa:1000
+bbb:900
+ccc:800
+ddd:700
+eee:600
+fff:500
+ggg:400
+hhh:300
+iii:200
+jjj:100
