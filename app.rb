@@ -17,8 +17,10 @@ post '/:initials/:score' do
      score_file = File.open('highscores.txt', 'r')
      # parse score file into an array of hashes
      score_file.each_line do |line|
-       line_fields = line.split(":")
-       score_list.push({initials: line_fields[0], score: line_fields[1]})
+       if line.length > 3
+       	  line_fields = line.split(":")
+       	  score_list.push({initials: line_fields[0], score: line_fields[1]})
+       end
      end
      score_file.close
      all_scores = ""
@@ -27,11 +29,11 @@ post '/:initials/:score' do
        score_list.each do |high_score|
          if new_score.to_i > high_score[:score].to_i
            high_score[:initials] = new_initials
-	   high_score[:score] = new_score
+	   high_score[:score] = new_score + "\n"
 	   new_score = "0"
          end
          # prepare scores to be written to file
-         all_scores += high_score[:initials] + ":" + high_score[:score] + "\n"       
+         all_scores += high_score[:initials] + ":" + high_score[:score]       
        end
      else
        all_scores += new_initials + ":" + new_score + "\n"
