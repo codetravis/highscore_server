@@ -33,5 +33,5 @@ post '/:initials/:score' do
      end
      new_score_file = File.open('highscores.txt', 'w')
      new_score_file.write(all_scores)
-     score_file.close
+     new_score_file.close
 end
