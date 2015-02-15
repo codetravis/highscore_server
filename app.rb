@@ -5,7 +5,7 @@ set :public_folder, File.dirname(__FILE__) + "/html5"
 get '/' do
     response.headers['Access-Control-Allow-Origin'] = "*"
     high_scores = ""
-    File.Open('highscores.txt', 'r') {|line| high_scores += line}
+    File.open('highscores.txt', 'r') {|line| high_scores += line}
     body high_scores
 end
 
