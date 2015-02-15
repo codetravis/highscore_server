@@ -8,7 +8,7 @@ get '/' do
     body high_scores
 end
 
-post '/' do
+post '/:initials/:score' do
      score_list = []
      score_file = File.open('highscores.txt', 'w+')
      # parse score file into an array of hashes
@@ -16,14 +16,12 @@ post '/' do
        line_fields = line.split(":")
        score_list.push({initials: line_fields[0], score: line_fields[1]})
      end
-     # parse data passed in from game into hash
-     player_score = data.split(":")
      # see if score is higher than any of our stored scores
      if score_list.length >= 10
        score_list.each do |high_score|
          if player_score[1].to_i > high_score[:score].to_i
-           high_score[:initials] = player_score[0]
-	   high_score[:score] = player_score[1]
+           high_score[:initials] = params[:initials]
+	   high_score[:score] = params[:score]
 	   break
          end
          # write new scores to file
