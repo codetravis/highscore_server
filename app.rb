@@ -27,7 +27,7 @@ post '/:initials/:score' do
          if new_score.to_i > high_score[:score].to_i
            high_score[:initials] = new_initials
 	   high_score[:score] = new_score
-	   new_score = 0
+	   new_score = "0"
          end
          # prepare scores to be written to file
          all_scores += high_score[:initials] + ":" + high_score[:score] + "\n"       
