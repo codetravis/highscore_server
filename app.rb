@@ -9,6 +9,9 @@ get '/' do
 end
 
 post '/:initials/:score' do
+     new_initials = params[:initials]
+     new_score = params[:score]
+
      score_list = []
      score_file = File.open('highscores.txt', 'r')
      # parse score file into an array of hashes
@@ -21,15 +24,16 @@ post '/:initials/:score' do
      # see if score is higher than any of our stored scores
      if score_list.length >= 10
        score_list.each do |high_score|
-         if params[:score].to_i > high_score[:score].to_i
-           high_score[:initials] = params[:initials]
-	   high_score[:score] = params[:score]
+         if new_score.to_i > high_score[:score].to_i
+           high_score[:initials] = new_initials
+	   high_score[:score] = new_score
+	   new_score = 0
          end
-         # write new scores to file
+         # prepare scores to be written to file
          all_scores += high_score[:initials] + ":" + high_score[:score] + "\n"       
        end
      else
-       all_scores += params[:initials] + ":" + params[:score] + "\n"
+       all_scores += new_initials + ":" + new_score + "\n"
      end
      new_score_file = File.open('highscores.txt', 'w')
      new_score_file.write(all_scores)
